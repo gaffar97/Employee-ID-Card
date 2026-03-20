@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonali Bank ID Generator | Direct Export Fix</title>
+    <title>Sonali Bank ID Generator | Alignment Fix</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root { --bank-blue: #38428a; --bank-gold: #c5a059; --bg-gray: #f0f2f5; }
@@ -33,7 +33,7 @@
             flex-shrink: 0;
         }
 
-        /* Front Header */
+        /* Front Header - Title matches Banner length */
         .header { background: var(--bank-blue); color: white; padding: 10px 12px; display: flex; align-items: center; gap: 10px; height: 75px; }
         .logo-box { width: 42px; height: 42px; flex-shrink: 0; }
         .logo-box img { width: 100%; height: 100%; object-fit: contain; }
@@ -52,28 +52,32 @@
         .val { font-weight: bold; }
         .bank-url { font-size: 9.5px; font-weight: bold; text-align: center; color: var(--bank-blue); padding-bottom: 10px; }
 
-        /* Back Body */
+        /* Back Body - Perfect F/H Alignment */
         .id-card-back { padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; }
         .qr-box { height: 50px; width: 50px; margin-bottom: 4px; }
         .qr-box img { width: 100%; height: 100%; }
-        .addr-head-container { display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 4px; }
-        .addr-head-text { font-weight: bold; font-size: 10.5px; }
-        .addr-head-line { border-top: 1px solid #000; width: 85%; margin-top: 1px; }
-        .addr-text { font-size: 9px; line-height: 1.2; text-transform: uppercase; margin-bottom: 10px; width: 100%; }
+        
+        .addr-head-container { width: 100%; margin-bottom: 5px; }
+        .addr-head-text { font-weight: bold; font-size: 10.5px; display: block; width: 100%; text-align: center; }
+        .addr-head-line { border-top: 1px solid #000; width: 90%; margin: 1px auto 0 auto; }
+        
+        .addr-text { font-size: 9px; line-height: 1.2; text-transform: uppercase; margin-bottom: 10px; width: 100%; height: 45px; }
         .contact-info { font-size: 10px; font-weight: bold; line-height: 1.3; margin-bottom: 8px; width: 100%; }
         
-        /* Compact Signature - Fixed Line Spacing */
+        /* NO SPACE Signatory details */
         .sig-container { margin-top: auto; width: 100%; }
         .sig-box { height: 38px; display: flex; align-items: flex-end; justify-content: center; }
         .sig-box img { max-width: 140px; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; filter: contrast(1.1); }
         .auth-label { 
             font-size: 8.5px; font-weight: bold; border-top: 1px solid #000; 
             width: 90%; margin: 0 auto; padding-top: 2px; 
-            line-height: 1.0; text-transform: uppercase; 
+            line-height: 0.95; text-transform: uppercase; 
+            display: block;
         }
+        .bank-label { font-size: 10px; font-weight: bold; margin: 0; padding: 0; line-height: 1.0; }
         .footer-msg { font-size: 8px; border-top: 0.5px solid #ddd; margin-top: 5px; padding-top: 3px; color: #444; width: 100%; }
 
-        /* Buttons */
+        /* Actions */
         .actions { margin-top: 25px; display: flex; gap: 15px; }
         .btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s; }
         .btn-pdf { background: #27ae60; color: white; }
@@ -92,7 +96,7 @@
     <div class="sidebar">
         <h2>ID Generator</h2>
         <div class="form-section">
-            <span class="section-title">Front Data</span>
+            <span class="section-title">Front Side</span>
             <div class="form-group"><label>Full Name</label><input type="text" id="inName" oninput="sync()"></div>
             <div class="form-group"><label>Designation</label><input type="text" id="inDesig" oninput="sync()"></div>
             <div class="form-group"><label>Index No</label><input type="text" id="inIndex" oninput="sync()"></div>
@@ -100,16 +104,16 @@
             <div class="form-group"><label>Serial No</label><input type="text" id="inSerial" oninput="sync()"></div>
         </div>
         <div class="form-section">
-            <span class="section-title">Back Data</span>
+            <span class="section-title">Back Side</span>
             <div class="form-group"><label>F/H's Name & Address</label><textarea id="inAddr" oninput="sync()"></textarea></div>
             <div class="form-group"><label>Blood Group</label><input type="text" id="inBlood" oninput="sync()"></div>
             <div class="form-group"><label>Mobile No</label><input type="text" id="inMob" oninput="sync()"></div>
             <div class="form-group"><label>Office Phone</label><input type="text" id="inOffice" oninput="sync()"></div>
         </div>
         <div class="form-section">
-            <span class="section-title">Authorization</span>
-            <div class="form-group"><label>Signatory Details (One line after another)</label><textarea id="inAuth" oninput="sync()" placeholder="(NAME)&#10;RANK"></textarea></div>
-            <div class="form-group"><label>Signature Image</label><input type="file" accept="image/*" onchange="handleImg(this, 'sig')"></div>
+            <span class="section-title">Authorized Official</span>
+            <div class="form-group"><label>Signatory Text (No space between lines)</label><textarea id="inAuth" oninput="sync()" placeholder="(NAME)&#10;RANK"></textarea></div>
+            <div class="form-group"><label>Upload Signature</label><input type="file" accept="image/*" onchange="handleImg(this, 'sig')"></div>
         </div>
         <div class="form-section">
             <span class="section-title">Media</span>
@@ -118,8 +122,8 @@
     </div>
 
     <div class="main-content">
-        <div class="id-container" id="capture-area">
-            <div style="display:flex; gap:20px; padding: 10px; background: white;">
+        <div class="id-container" id="pdf-content">
+            <div style="display:flex; gap:20px; padding: 10px; background: white;" id="p1-wrap">
                 <div class="id-card" id="f-card">
                     <div class="header">
                         <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/45?text=Logo'"></div>
@@ -155,7 +159,7 @@
                     <div class="sig-container">
                         <div class="sig-box"><img id="oSig" src=""></div>
                         <span class="auth-label" id="oAuth"></span>
-                        <div style="font-size:10px; font-weight:bold; margin-top:2px;">Sonali Bank PLC</div>
+                        <div class="bank-label">Sonali Bank PLC</div>
                     </div>
                     <div class="footer-msg">If found please handover to the nearest <strong>Sonali Bank PLC Branch</strong></div>
                 </div>
@@ -189,17 +193,17 @@
                 reader.onload = (e) => {
                     const target = type === 'sig' ? 'oSig' : 'oPhoto';
                     document.getElementById(target).src = e.target.result;
+                    document.getElementById(target).style.opacity = "1";
                 };
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
         async function generate3PagePDF() {
-            const worker = html2pdf();
+            const element = document.getElementById('pdf-content');
             const front = document.getElementById('f-card');
             const back = document.getElementById('b-card');
 
-            // Set global options
             const opt = {
                 margin: 0.5,
                 filename: 'Sonali_Bank_ID_Package.pdf',
@@ -208,17 +212,14 @@
                 jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
             };
 
-            // Manual multi-page construction
-            const pdf = worker.set(opt).from(document.getElementById('capture-area')).toPdf().get('pdf');
+            const worker = html2pdf().set(opt).from(element).toPdf().get('pdf');
 
-            pdf.then(pdfObj => {
-                // Page 2: Front Only
-                pdfObj.addPage();
-                worker.from(front).toContainer().toCanvas().toImg().toPdf().get('pdf').then(() => {
-                    // Page 3: Back Only
-                    pdfObj.addPage();
-                    worker.from(back).toContainer().toCanvas().toImg().toPdf().save();
-                });
+            worker.then(pdf => {
+                pdf.addPage();
+                return html2pdf().set(opt).from(front).toContainer().toCanvas().toImg().toPdf().get('pdf');
+            }).then(pdf => {
+                pdf.addPage();
+                return html2pdf().set(opt).from(back).toContainer().toCanvas().toImg().toPdf().save();
             });
         }
 
