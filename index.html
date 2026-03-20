@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonali Bank ID | Final PDF Resolution</title>
+    <title>Sonali Bank ID | Final Version</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
@@ -21,10 +21,9 @@
         .form-group textarea { height: 50px; resize: none; }
 
         /* Main Preview Area */
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; position: relative; }
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
         .id-row-preview { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: flex; gap: 20px; }
         
-        /* Card Specs */
         .id-card, .id-card-back { 
             width: 2.125in; height: 3.375in; 
             border: 0.5px solid #aaa; position: relative; 
@@ -38,12 +37,10 @@
         .logo-box img { width: 100%; height: 100%; object-fit: contain; }
         .bn-banner { height: 24px; width: 100%; object-fit: contain; object-position: left; }
         .en-title { font-size: 12px; font-weight: bold; margin-top: 1px; }
-        
         .id-banner { background: var(--bank-gold); color: white; text-align: center; font-size: 10px; font-weight: bold; padding: 4px 0; }
         .serial-no { text-align: center; font-size: 9px; margin: 3px 0; font-weight: bold; }
         .photo-frame { width: 1in; height: 1.15in; border: 1px solid var(--bank-gold); margin: 0 auto; overflow: hidden; background: #f9f9f9; }
         .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
-        
         .info-grid { padding: 8px 15px; font-size: 11px; flex-grow: 1; }
         .row { display: grid; grid-template-columns: 65px 8px 1fr; margin-bottom: 2px; }
         .val { font-weight: bold; }
@@ -53,27 +50,23 @@
         .id-card-back { padding: 10px; text-align: center; align-items: center; }
         .qr-box { height: 55px; width: 55px; margin-bottom: 5px; }
         .qr-box img { width: 100%; height: 100%; }
-        
         .addr-head { font-weight: bold; font-size: 10px; display: block; width: 90%; border-bottom: 1.2px solid black; margin: 0 auto 5px auto; padding-bottom: 1px; }
-        .addr-body { font-size: 9px; line-height: 1.2; text-transform: uppercase; height: 42px; margin-bottom: 5px; width: 100%; }
+        .addr-body { font-size: 9px; line-height: 1.1; text-transform: uppercase; height: 42px; margin-bottom: 4px; width: 100%; overflow: hidden; }
+        .contact-box { font-size: 10px; font-weight: bold; line-height: 1.2; margin-bottom: 4px; width: 100%; }
         
-        .contact-box { font-size: 10px; font-weight: bold; line-height: 1.2; margin-bottom: 5px; width: 100%; }
-        
-        /* Signatory: Strict Zero Spacing */
+        /* Signatory: Strict Zero Spacing Fix */
         .sig-area { margin-top: auto; width: 100%; }
         .sig-img { height: 35px; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 1px; }
         .sig-img img { max-width: 130px; max-height: 100%; }
         .auth-line { 
             font-size: 8.5px; font-weight: bold; border-top: 1px solid #000; 
             width: 85%; margin: 0 auto; padding-top: 1px; 
-            line-height: 0.9; text-transform: uppercase; display: block;
+            line-height: 0.85; text-transform: uppercase; display: block;
         }
-        .bank-label { font-size: 10px; font-weight: bold; margin: 0; padding: 0; line-height: 0.9; }
+        .bank-label { font-size: 10px; font-weight: bold; margin: 0; padding: 0; line-height: 0.85; }
         .footer-note { font-size: 8px; border-top: 0.5px solid #eee; margin-top: 5px; padding-top: 3px; color: #666; width: 100%; }
 
-        .btn-pdf { margin-top: 25px; padding: 12px 35px; background: #27ae60; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-pdf:hover { background: #219150; }
-        .btn-pdf:disabled { background: #95a5a6; cursor: not-allowed; }
+        .btn-pdf { margin-top: 25px; padding: 12px 35px; background: #27ae60; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -83,14 +76,15 @@
         <div class="form-group"><label>Full Name</label><input type="text" id="inName" oninput="update()" placeholder="M. A. GAFFAR"></div>
         <div class="form-group"><label>Designation</label><input type="text" id="inDesig" oninput="update()" placeholder="SENIOR OFFICER"></div>
         <div class="form-group"><label>Index No</label><input type="text" id="inIndex" oninput="update()" placeholder="G-54936"></div>
-        <div class="form-group"><label>Issue Date</label><input type="text" id="inIssue" oninput="update()" placeholder="01-01-2026"></div>
+        <div class="form-group"><label>Issue Date (DD-MM-YYYY)</label><input type="text" id="inIssue" oninput="update()" placeholder="01-01-2026"></div>
         <div class="form-group"><label>Serial No</label><input type="text" id="inSerial" oninput="update()" placeholder="30407"></div>
         <hr>
         <div class="form-group"><label>F/H Name & Address</label><textarea id="inAddr" oninput="update()"></textarea></div>
         <div class="form-group"><label>Blood Group</label><input type="text" id="inBlood" oninput="update()"></div>
         <div class="form-group"><label>Mobile No</label><input type="text" id="inMob" oninput="update()"></div>
+        <div class="form-group"><label>Office Phone</label><input type="text" id="inOffice" oninput="update()"></div>
         <hr>
-        <div class="form-group"><label>Signatory Details (Line by Line)</label><textarea id="inAuth" oninput="update()"></textarea></div>
+        <div class="form-group"><label>Signatory (One line per detail)</label><textarea id="inAuth" oninput="update()"></textarea></div>
         <div class="form-group"><label>Signature Image</label><input type="file" onchange="loadImg(this, 'oSig')"></div>
         <div class="form-group"><label>Employee Photo</label><input type="file" onchange="loadImg(this, 'oPhoto')"></div>
     </div>
@@ -124,6 +118,7 @@
                 <div class="contact-box">
                     <div>Blood Group : <span id="oBlood"></span></div>
                     <div>Mobile No : <span id="oMob"></span></div>
+                    <div>Office Phone : <span id="oOffice"></span></div>
                 </div>
                 <div class="sig-area">
                     <div class="sig-img"><img id="oSig" src=""></div>
@@ -133,7 +128,6 @@
                 <div class="footer-note">If found please handover to the nearest <b>Sonali Bank PLC Branch</b></div>
             </div>
         </div>
-
         <button class="btn-pdf" id="pdfBtn" onclick="generate3PagePDF()">💾 Download 3-Page PDF</button>
     </div>
 
@@ -141,13 +135,14 @@
         const { jsPDF } = window.jspdf;
 
         function update() {
-            const fields = ['Name','Desig','Index','Issue','Serial','Addr','Blood','Mob'];
-            fields.forEach(f => document.getElementById('o'+f).innerText = document.getElementById('in'+f).value);
+            const fields = ['Name','Desig','Index','Issue','Serial','Addr','Blood','Mob','Office'];
+            fields.forEach(f => {
+                const el = document.getElementById('o'+f);
+                if(el) el.innerText = document.getElementById('in'+f).value;
+            });
             
-            // Authorized Signatory Line spacing fix
             document.getElementById('oAuth').innerHTML = document.getElementById('inAuth').value.replace(/\n/g, '<br>');
             
-            // Dynamic QR Fix
             const qrData = `Sonali Bank\nName: ${document.getElementById('inName').value}\nIndex: ${document.getElementById('inIndex').value}`;
             document.getElementById('oQR').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
         }
@@ -162,47 +157,37 @@
 
         async function captureNode(nodeId) {
             const node = document.getElementById(nodeId);
-            const canvas = await html2canvas(node, {
-                scale: 4, // High resolution
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: "#ffffff"
-            });
+            const canvas = await html2canvas(node, { scale: 4, useCORS: true, backgroundColor: "#ffffff" });
             return canvas.toDataURL('image/jpeg', 1.0);
         }
 
         async function generate3PagePDF() {
             const btn = document.getElementById('pdfBtn');
             btn.disabled = true;
-            btn.innerText = "Rendering Pages...";
+            btn.innerText = "Generating PDF...";
 
             try {
-                const pdf = new jsPDF('l', 'in', 'a4'); // Landscape A4
+                const pdf = new jsPDF('l', 'in', 'a4');
+                const img1 = await captureNode('combined-view');
+                pdf.addImage(img1, 'JPEG', 0.5, 0.5, 5, 4); 
 
-                // Page 1: Combined View
-                const imgData1 = await captureNode('combined-view');
-                pdf.addImage(imgData1, 'JPEG', 0.5, 0.5, 5, 4); 
-
-                // Page 2: Front Only
                 pdf.addPage();
-                const imgData2 = await captureNode('front-card');
-                pdf.addImage(imgData2, 'JPEG', 0.5, 0.5, 2.125, 3.375);
+                const img2 = await captureNode('front-card');
+                pdf.addImage(img2, 'JPEG', 0.5, 0.5, 2.125, 3.375);
 
-                // Page 3: Back Only
                 pdf.addPage();
-                const imgData3 = await captureNode('back-card');
-                pdf.addImage(imgData3, 'JPEG', 0.5, 0.5, 2.125, 3.375);
+                const img3 = await captureNode('back-card');
+                pdf.addImage(img3, 'JPEG', 0.5, 0.5, 2.125, 3.375);
 
                 pdf.save('Sonali_Bank_ID_Package.pdf');
             } catch (err) {
                 console.error(err);
-                alert("PDF Generation failed. Please ensure all images are loaded.");
+                alert("Capture failed. Try using Chrome on Desktop.");
             } finally {
                 btn.disabled = false;
                 btn.innerText = "💾 Download 3-Page PDF";
             }
         }
-
         window.onload = update;
     </script>
 </body>
