@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonali Bank ID Generator | Pro</title>
+    <title>Sonali Bank ID Generator | Professional</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root { --bank-blue: #38428a; --bank-gold: #c5a059; --bg-gray: #f4f7f6; }
         * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-gray); margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-gray); margin: 0; display: flex; height: 100vh; overflow: hidden; }
 
-        /* Sidebar Styling */
+        /* Sidebar Inputs */
         .sidebar { width: 380px; background: white; border-right: 1px solid #ddd; padding: 25px; overflow-y: auto; box-shadow: 2px 0 15px rgba(0,0,0,0.05); }
         .sidebar h2 { color: var(--bank-blue); font-size: 1.3rem; margin: 0 0 20px 0; border-bottom: 2px solid var(--bank-gold); padding-bottom: 10px; }
         .form-section { margin-bottom: 20px; }
@@ -21,11 +21,10 @@
         .form-group input, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
         .form-group textarea { height: 50px; resize: none; }
 
-        /* Preview Main Area */
+        /* Preview Area */
         .main-content { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
-        
-        /* ID Card Layout */
         .id-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); display: flex; gap: 30px; }
+        
         .id-card, .id-card-back { 
             width: 2.125in; height: 3.375in; 
             border: 0.5px solid #888; position: relative; 
@@ -33,57 +32,55 @@
             font-family: "Times New Roman", Times, serif;
         }
 
-        /* Front Side Elements */
-        .header { background: var(--bank-blue); color: white; padding: 8px; display: flex; align-items: center; gap: 10px; height: 65px; }
+        /* Fixed Header Alignment */
+        .header { background: var(--bank-blue); color: white; padding: 10px 12px; display: flex; align-items: center; gap: 12px; height: 70px; }
         .logo-box { width: 42px; height: 42px; flex-shrink: 0; }
         #imgLogo { width: 100%; height: 100%; object-fit: contain; }
         
-        .header-text-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-        .bn-banner-box { height: 20px; width: 100%; display: flex; align-items: center; }
-        #imgBnTitle { max-height: 100%; width: 100%; object-fit: contain; }
+        .header-text-container { flex-grow: 1; display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+        .bn-banner-box { width: 100%; height: 20px; margin-bottom: 2px; }
+        #imgBnTitle { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
         
-        .header-line { height: 1.5px; background: white; margin: 2px 0; width: 100%; }
-        .en-title { font-size: 11.5px; font-weight: bold; width: 100%; text-align: left; letter-spacing: 0.2px; }
+        .header-line { height: 1.5px; background: white; width: 100%; margin: 2px 0; }
+        .en-title { font-size: 12px; font-weight: bold; width: 100%; text-align: left; }
 
-        .id-banner { background: var(--bank-gold); color: white; text-align: center; font-size: 10px; font-weight: bold; padding: 3px 0; letter-spacing: 1px; }
-        .serial-text { text-align: center; font-size: 9px; margin: 4px 0; font-weight: bold; }
+        /* Front Body */
+        .id-banner { background: var(--bank-gold); color: white; text-align: center; font-size: 10px; font-weight: bold; padding: 4px 0; letter-spacing: 1px; }
+        .serial-text { text-align: center; font-size: 9px; margin: 5px 0; font-weight: bold; }
         .photo-frame { width: 1.05in; height: 1.2in; border: 1.5px solid var(--bank-gold); margin: 0 auto; overflow: hidden; }
         #displayPhoto { width: 100%; height: 100%; object-fit: cover; }
 
-        .info-grid { padding: 8px 12px; flex-grow: 1; font-size: 10.5px; }
-        .row { display: grid; grid-template-columns: 60px 8px 1fr; margin-bottom: 2px; }
+        .info-grid { padding: 8px 15px; flex-grow: 1; font-size: 11px; }
+        .row { display: grid; grid-template-columns: 65px 8px 1fr; margin-bottom: 3px; }
         .val { font-weight: bold; }
-        .bank-url { font-size: 9px; font-weight: bold; text-align: center; color: var(--bank-blue); padding-bottom: 8px; }
+        .bank-url { font-size: 9.5px; font-weight: bold; text-align: center; color: var(--bank-blue); padding-bottom: 10px; }
 
-        /* Back Side Elements */
-        .id-card-back { padding: 10px; text-align: center; display: flex; flex-direction: column; }
-        .qr-box { height: 55px; margin-bottom: 5px; }
-        #imgQR { height: 50px; width: 50px; }
-        .addr-head { font-weight: bold; text-decoration: underline; font-size: 10px; display: block; }
-        .addr-text { font-size: 8.5px; line-height: 1.2; text-transform: uppercase; margin: 4px 0 8px 0; min-height: 30px; }
+        /* Back Side Body */
+        .id-card-back { padding: 12px; text-align: center; display: flex; flex-direction: column; }
+        #imgQR { height: 55px; width: 55px; margin-bottom: 5px; }
+        .addr-head { font-weight: bold; text-decoration: underline; font-size: 10px; display: block; margin-bottom: 3px; }
+        .addr-text { font-size: 9px; line-height: 1.3; text-transform: uppercase; margin-bottom: 10px; min-height: 40px; }
         
-        .contact-info { font-size: 9px; font-weight: bold; line-height: 1.3; margin-bottom: 5px; }
+        .contact-info { font-size: 9.5px; font-weight: bold; line-height: 1.4; margin-bottom: 8px; text-align: center; }
         
-        .sig-container { margin-top: auto; width: 100%; }
+        /* Transparent Signatures */
+        .sig-container { margin-top: auto; width: 100%; position: relative; }
         .sig-box { height: 35px; display: flex; align-items: flex-end; justify-content: center; }
-        
-        /* Transparent Signature Logic */
         #displaySig { 
-            max-width: 120px; max-height: 100%; 
-            object-fit: contain; 
-            mix-blend-mode: multiply; /* Removes white background automatically */
-            filter: contrast(1.2); /* Makes ink sharper */
+            max-width: 130px; max-height: 100%; object-fit: contain; 
+            mix-blend-mode: multiply; filter: contrast(1.1); 
         }
         
         .auth-label { 
-            font-size: 8px; font-weight: bold; border-top: 0.8px solid #000; 
-            width: 90%; margin: 0 auto; padding-top: 2px; 
-            line-height: 1.1; display: block;
-            text-transform: uppercase;
+            font-size: 8.5px; font-weight: bold; border-top: 1px solid #000; 
+            width: 90%; margin: 0 auto; padding-top: 3px; 
+            line-height: 1.2; text-transform: uppercase;
         }
 
-        .actions { margin-top: 25px; display: flex; gap: 15px; }
-        .btn { padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .footer-msg { font-size: 8px; border-top: 0.5px solid #ddd; margin-top: 8px; padding-top: 4px; }
+
+        .actions { margin-top: 30px; display: flex; gap: 15px; }
+        .btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; }
         .btn-pdf { background: #27ae60; color: white; }
         .btn-print { background: var(--bank-blue); color: white; }
 
@@ -96,29 +93,31 @@
         <h2>ID Generator</h2>
         
         <div class="form-section">
-            <span class="section-title">Front Details</span>
+            <span class="section-title">Identity Details</span>
             <div class="form-group"><label>Full Name</label><input type="text" id="inName" placeholder="M. A. Gaffar" oninput="updateCard()"></div>
             <div class="form-group"><label>Designation</label><input type="text" id="inDesig" placeholder="Senior Officer" oninput="updateCard()"></div>
             <div class="form-group"><label>Index No</label><input type="text" id="inIndex" placeholder="G-54936" oninput="updateCard()"></div>
             <div class="form-group"><label>Issue Date</label><input type="text" id="inIssue" value="20-03-2026" oninput="updateCard()"></div>
+            <div class="form-group"><label>Serial No</label><input type="text" id="inSerial" placeholder="00680" oninput="updateCard()"></div>
         </div>
         
         <div class="form-section">
-            <span class="section-title">Back Details</span>
-            <div class="form-group"><label>Father & Address</label><textarea id="inAddr" oninput="updateCard()">MD. MOJIBUR RAHAMAN, VILL-MANURI, P.O-GHANIA...</textarea></div>
-            <div class="form-group"><label>Office Phone</label><input type="text" id="inOffice" placeholder="+8801324417043" oninput="updateCard()"></div>
-            <div class="form-group"><label>Mobile No</label><input type="text" id="inMob" placeholder="01845319982" oninput="updateCard()"></div>
+            <span class="section-title">Back Side Info</span>
+            <div class="form-group"><label>Father & Address</label><textarea id="inAddr" oninput="updateCard()">MD. MOJIBUR RAHAMAN, VILL-MANURI, P.O-GHANIA, P.S- FARIDGANJ, CHANDPUR</textarea></div>
+            <div class="form-group"><label>Blood Group</label><input type="text" id="inBlood" value="B+" oninput="updateCard()"></div>
+            <div class="form-group"><label>Mobile No</label><input type="text" id="inMob" value="01845319982" oninput="updateCard()"></div>
+            <div class="form-group"><label>Office Phone</label><input type="text" id="inOffice" value="+8801324417043" oninput="updateCard()"></div>
         </div>
 
         <div class="form-section">
-            <span class="section-title">Authorized Official</span>
-            <div class="form-group"><label>Signatory Name & Title</label><textarea id="inAuth" oninput="updateCard()">(MD K H MAZHARUL KABIR)&#10;DEPUTY GENERAL MANAGER</textarea></div>
-            <div class="form-group"><label>Signature Upload</label><input type="file" accept="image/*" onchange="previewImg(this, 'displaySig')"></div>
+            <span class="section-title">Authorizer</span>
+            <div class="form-group"><label>Signatory Name & Rank</label><textarea id="inAuth" oninput="updateCard()">(MD K H MAZHARUL KABIR)&#10;DEPUTY GENERAL MANAGER, PO CENTRAL CHATTOGRAM.</textarea></div>
+            <div class="form-group"><label>Signature File</label><input type="file" accept="image/*" onchange="previewImg(this, 'displaySig')"></div>
         </div>
         
         <div class="form-section">
-            <span class="section-title">Media</span>
-            <div class="form-group"><label>Employee Photo</label><input type="file" accept="image/*" onchange="previewImg(this, 'displayPhoto')"></div>
+            <span class="section-title">Photos</span>
+            <div class="form-group"><label>User Photo</label><input type="file" accept="image/*" onchange="previewImg(this, 'displayPhoto')"></div>
         </div>
     </div>
 
@@ -128,7 +127,7 @@
                 <div class="id-card">
                     <div class="header">
                         <div class="logo-box"><img id="imgLogo" src="logo.png" onerror="this.src='https://via.placeholder.com/45?text=Logo'"></div>
-                        <div class="header-text-area">
+                        <div class="header-text-container">
                             <div class="bn-banner-box"><img id="imgBnTitle" src="banner.png"></div>
                             <div class="header-line"></div>
                             <div class="en-title">Sonali Bank PLC</div>
@@ -147,7 +146,7 @@
                 </div>
 
                 <div class="id-card-back">
-                    <div class="qr-box"><img id="imgQR" src=""></div>
+                    <img id="imgQR" src="">
                     <span class="addr-head">Father's Name & Permanent Address :</span>
                     <div class="addr-text" id="outAddr">---</div>
                     <div class="contact-info">
@@ -158,9 +157,9 @@
                     <div class="sig-container">
                         <div class="sig-box"><img id="displaySig" src=""></div>
                         <span class="auth-label" id="outAuth">(Authorized Signature)</span>
-                        <div style="font-size:9px; font-weight:bold; margin-top:2px;">Sonali Bank PLC</div>
+                        <div style="font-size:10px; font-weight:bold; margin-top:2px;">Sonali Bank PLC</div>
                     </div>
-                    <div style="border-top:0.5px solid #ddd; margin-top:5px; font-size:8px; padding-top:2px;">If found please handover to the nearest <strong>Sonali Bank PLC Branch</strong></div>
+                    <div class="footer-msg">If found please handover to the nearest <strong>Sonali Bank PLC Branch</strong></div>
                 </div>
             </div>
         </div>
@@ -177,15 +176,16 @@
             document.getElementById('outIndex').innerText = document.getElementById('inIndex').value || '---';
             document.getElementById('outDesig').innerText = document.getElementById('inDesig').value || '---';
             document.getElementById('outIssue').innerText = document.getElementById('inIssue').value || '20-03-2026';
+            document.getElementById('outSerial').innerText = document.getElementById('inSerial').value || '-----';
             document.getElementById('outAddr').innerText = document.getElementById('inAddr').value || '---';
+            document.getElementById('outBlood').innerText = document.getElementById('inBlood').value || '---';
             document.getElementById('outMob').innerText = document.getElementById('inMob').value || '---';
             document.getElementById('outOffice').innerText = document.getElementById('inOffice').value || '---';
             
-            // Format Signatory Text with line breaks
             const authText = document.getElementById('inAuth').value || '(Authorized Signature)';
             document.getElementById('outAuth').innerHTML = authText.replace(/\n/g, '<br>');
 
-            const qrData = `Sonali Bank ID\nName: ${document.getElementById('inName').value}\nIndex: ${document.getElementById('inIndex').value}`;
+            const qrData = `Sonali Bank\nName: ${document.getElementById('inName').value}\nIndex: ${document.getElementById('inIndex').value}`;
             document.getElementById('imgQR').src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(qrData)}`;
         }
 
