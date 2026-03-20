@@ -3,165 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonali Bank ID Generator | Official</title>
+    <title>Sonali Bank ID Generator | Pro</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        :root { --bank-blue: #38428a; --bank-gold: #c5a059; --bg-gray: #f0f2f5; }
+        :root { --bank-blue: #38428a; --bank-gold: #c5a059; --bg-gray: #f4f7f6; }
         * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-gray); margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-gray); margin: 0; display: flex; height: 100vh; overflow: hidden; }
 
-        /* Left Sidebar - Input Form */
-        .sidebar { width: 380px; background: white; border-right: 1px solid #ddd; padding: 25px; overflow-y: auto; box-shadow: 2px 0 15px rgba(0,0,0,0.05); z-index: 10; }
-        .sidebar h2 { color: var(--bank-blue); font-size: 1.4rem; margin: 0 0 20px 0; display: flex; align-items: center; gap: 10px; }
-        .sidebar h2::after { content: ''; flex-grow: 1; height: 2px; background: var(--bank-gold); }
-        
-        .form-section { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-        .section-title { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display: block; font-weight: bold; }
-
+        /* Sidebar Styling */
+        .sidebar { width: 380px; background: white; border-right: 1px solid #ddd; padding: 25px; overflow-y: auto; box-shadow: 2px 0 15px rgba(0,0,0,0.05); }
+        .sidebar h2 { color: var(--bank-blue); font-size: 1.3rem; margin: 0 0 20px 0; border-bottom: 2px solid var(--bank-gold); padding-bottom: 10px; }
+        .form-section { margin-bottom: 20px; }
+        .section-title { font-size: 11px; color: #888; text-transform: uppercase; font-weight: bold; margin-bottom: 10px; display: block; }
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #444; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; transition: border 0.2s; }
-        .form-group input:focus { outline: none; border-color: var(--bank-blue); box-shadow: 0 0 0 3px rgba(56, 66, 138, 0.1); }
-        .form-group textarea { height: 70px; resize: none; }
+        .form-group input, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
+        .form-group textarea { height: 50px; resize: none; }
 
-        /* Right Side - Preview */
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; overflow-y: auto; position: relative; }
-        .live-indicator { position: absolute; top: 20px; right: 20px; font-size: 12px; color: #27ae60; font-weight: bold; display: flex; align-items: center; gap: 5px; }
-        .live-dot { width: 8px; height: 8px; background: #27ae60; border-radius: 50%; animation: pulse 1.5s infinite; }
-
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-        /* ID Card Styling */
-        .id-container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: flex; gap: 30px; }
+        /* Preview Main Area */
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
+        
+        /* ID Card Layout */
+        .id-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); display: flex; gap: 30px; }
         .id-card, .id-card-back { 
             width: 2.125in; height: 3.375in; 
-            border: 0.5px solid #ccc; position: relative; 
+            border: 0.5px solid #888; position: relative; 
             display: flex; flex-direction: column; overflow: hidden; background: #fff;
             font-family: "Times New Roman", Times, serif;
         }
 
-        /* Front Elements */
-        .header { background: var(--bank-blue); color: white; padding: 0 8px; display: flex; align-items: center; gap: 8px; height: 62px; }
-        .logo-box { width: 45px; height: 45px; flex-shrink: 0; display: flex; align-items: center; }
+        /* Front Side Elements */
+        .header { background: var(--bank-blue); color: white; padding: 8px; display: flex; align-items: center; gap: 10px; height: 65px; }
+        .logo-box { width: 42px; height: 42px; flex-shrink: 0; }
         #imgLogo { width: 100%; height: 100%; object-fit: contain; }
-        .bn-banner-box { height: 22px; width: 100%; display: flex; align-items: center; }
-        #imgBnTitle { max-height: 100%; max-width: 100%; object-fit: contain; }
-        .en-title { font-size: 12px; font-weight: bold; margin-top: -2px; }
+        
+        .header-text-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .bn-banner-box { height: 20px; width: 100%; display: flex; align-items: center; }
+        #imgBnTitle { max-height: 100%; width: 100%; object-fit: contain; }
+        
+        .header-line { height: 1.5px; background: white; margin: 2px 0; width: 100%; }
+        .en-title { font-size: 11.5px; font-weight: bold; width: 100%; text-align: left; letter-spacing: 0.2px; }
 
-        .id-banner { background: var(--bank-gold); color: white; text-align: center; font-size: 10px; font-weight: bold; padding: 3px 0; letter-spacing: 0.5px; }
-        .serial-text { text-align: center; font-size: 9px; margin: 5px 0; font-weight: bold; color: #555; }
-        .photo-frame { width: 1.05in; height: 1.25in; border: 1.5px solid var(--bank-gold); margin: 0 auto; overflow: hidden; background: #f9f9f9; }
+        .id-banner { background: var(--bank-gold); color: white; text-align: center; font-size: 10px; font-weight: bold; padding: 3px 0; letter-spacing: 1px; }
+        .serial-text { text-align: center; font-size: 9px; margin: 4px 0; font-weight: bold; }
+        .photo-frame { width: 1.05in; height: 1.2in; border: 1.5px solid var(--bank-gold); margin: 0 auto; overflow: hidden; }
         #displayPhoto { width: 100%; height: 100%; object-fit: cover; }
 
-        .info-grid { padding: 8px 12px; flex-grow: 1; font-size: 11px; line-height: 1.2; }
-        .row { display: grid; grid-template-columns: 65px 8px 1fr; margin-bottom: 3px; }
-        .val { font-weight: bold; color: #000; }
-        .bank-url { font-size: 9.5px; font-weight: bold; text-align: center; color: var(--bank-blue); padding-bottom: 10px; }
+        .info-grid { padding: 8px 12px; flex-grow: 1; font-size: 10.5px; }
+        .row { display: grid; grid-template-columns: 60px 8px 1fr; margin-bottom: 2px; }
+        .val { font-weight: bold; }
+        .bank-url { font-size: 9px; font-weight: bold; text-align: center; color: var(--bank-blue); padding-bottom: 8px; }
 
-        /* Back Elements */
-        .id-card-back { padding: 12px; text-align: center; }
-        .qr-box { height: 65px; margin-bottom: 5px; display: flex; align-items: center; justify-content: center; }
-        #imgQR { height: 60px; width: 60px; }
-        .addr-head { font-weight: bold; text-decoration: underline; font-size: 10px; display: block; margin-bottom: 4px; }
-        .addr-text { font-size: 9px; line-height: 1.3; text-transform: uppercase; margin-bottom: 10px; min-height: 40px; color: #333; }
-        .contact-info { font-size: 10px; font-weight: bold; line-height: 1.4; margin-bottom: 8px; border-top: 0.5px solid #eee; padding-top: 5px; }
+        /* Back Side Elements */
+        .id-card-back { padding: 10px; text-align: center; display: flex; flex-direction: column; }
+        .qr-box { height: 55px; margin-bottom: 5px; }
+        #imgQR { height: 50px; width: 50px; }
+        .addr-head { font-weight: bold; text-decoration: underline; font-size: 10px; display: block; }
+        .addr-text { font-size: 8.5px; line-height: 1.2; text-transform: uppercase; margin: 4px 0 8px 0; min-height: 30px; }
+        
+        .contact-info { font-size: 9px; font-weight: bold; line-height: 1.3; margin-bottom: 5px; }
         
         .sig-container { margin-top: auto; width: 100%; }
-        .sig-box { height: 32px; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 2px; }
-        #displaySig { max-width: 120px; max-height: 100%; object-fit: contain; }
-        .auth-label { font-size: 10px; font-weight: bold; border-top: 1px solid #000; width: 90%; margin: 0 auto; padding-top: 2px; display: block; }
-        .return-msg { border-top: 0.5px solid #ddd; margin-top: 8px; padding-top: 5px; font-size: 8.5px; color: #444; line-height: 1.2; }
+        .sig-box { height: 35px; display: flex; align-items: flex-end; justify-content: center; }
+        
+        /* Transparent Signature Logic */
+        #displaySig { 
+            max-width: 120px; max-height: 100%; 
+            object-fit: contain; 
+            mix-blend-mode: multiply; /* Removes white background automatically */
+            filter: contrast(1.2); /* Makes ink sharper */
+        }
+        
+        .auth-label { 
+            font-size: 8px; font-weight: bold; border-top: 0.8px solid #000; 
+            width: 90%; margin: 0 auto; padding-top: 2px; 
+            line-height: 1.1; display: block;
+            text-transform: uppercase;
+        }
 
-        /* Action Buttons */
-        .actions { margin-top: 30px; display: flex; gap: 15px; }
-        .btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
+        .actions { margin-top: 25px; display: flex; gap: 15px; }
+        .btn { padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-pdf { background: #27ae60; color: white; }
-        .btn-pdf:hover { background: #219150; transform: translateY(-2px); }
         .btn-print { background: var(--bank-blue); color: white; }
-        .btn-print:hover { background: #2c346d; transform: translateY(-2px); }
 
-        @media print { .sidebar, .actions, .live-indicator { display: none !important; } body { background: white; } .id-container { box-shadow: none; padding: 0; } }
+        @media print { .sidebar, .actions { display: none; } body { background: white; } .id-container { box-shadow: none; padding: 0; } }
     </style>
 </head>
 <body>
 
-    <div class="sidebar no-print">
+    <div class="sidebar">
         <h2>ID Generator</h2>
         
         <div class="form-section">
-            <span class="section-title">Front Side Information</span>
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="inName" placeholder="M. A. Gaffar" oninput="updateCard()">
-            </div>
-            <div class="form-group">
-                <label>Designation</label>
-                <input type="text" id="inDesig" placeholder="Senior Officer" oninput="updateCard()">
-            </div>
-            <div class="form-group">
-                <label>Index Number</label>
-                <input type="text" id="inIndex" placeholder="G-XXXXX" oninput="updateCard()">
-            </div>
-            <div class="form-group">
-                <label>Issue Date</label>
-                <input type="text" id="inIssue" value="20-03-2026" oninput="updateCard()">
-            </div>
-            <div class="form-group">
-                <label>Serial Number</label>
-                <input type="text" id="inSerial" placeholder="00000" oninput="updateCard()">
-            </div>
+            <span class="section-title">Front Details</span>
+            <div class="form-group"><label>Full Name</label><input type="text" id="inName" placeholder="M. A. Gaffar" oninput="updateCard()"></div>
+            <div class="form-group"><label>Designation</label><input type="text" id="inDesig" placeholder="Senior Officer" oninput="updateCard()"></div>
+            <div class="form-group"><label>Index No</label><input type="text" id="inIndex" placeholder="G-54936" oninput="updateCard()"></div>
+            <div class="form-group"><label>Issue Date</label><input type="text" id="inIssue" value="20-03-2026" oninput="updateCard()"></div>
         </div>
         
         <div class="form-section">
-            <span class="section-title">Back Side & Verification</span>
-            <div class="form-group">
-                <label>Father's Name & Address</label>
-                <textarea id="inAddr" placeholder="Enter Full Address..." oninput="updateCard()"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Blood Group</label>
-                <input type="text" id="inBlood" placeholder="e.g. B+" oninput="updateCard()">
-            </div>
-            <div class="form-group">
-                <label>Mobile Number</label>
-                <input type="text" id="inMob" placeholder="01XXXXXXXXX" oninput="updateCard()">
-            </div>
+            <span class="section-title">Back Details</span>
+            <div class="form-group"><label>Father & Address</label><textarea id="inAddr" oninput="updateCard()">MD. MOJIBUR RAHAMAN, VILL-MANURI, P.O-GHANIA...</textarea></div>
+            <div class="form-group"><label>Office Phone</label><input type="text" id="inOffice" placeholder="+8801324417043" oninput="updateCard()"></div>
+            <div class="form-group"><label>Mobile No</label><input type="text" id="inMob" placeholder="01845319982" oninput="updateCard()"></div>
         </div>
 
-        <div class="form-section" style="border:none;">
-            <span class="section-title">Upload Media</span>
-            <div class="form-group">
-                <label>Employee Photo</label>
-                <input type="file" accept="image/*" onchange="previewImg(this, 'displayPhoto')">
-            </div>
-            <div class="form-group">
-                <label>Authorized Signature</label>
-                <input type="file" accept="image/*" onchange="previewImg(this, 'displaySig')">
-            </div>
+        <div class="form-section">
+            <span class="section-title">Authorized Official</span>
+            <div class="form-group"><label>Signatory Name & Title</label><textarea id="inAuth" oninput="updateCard()">(MD K H MAZHARUL KABIR)&#10;DEPUTY GENERAL MANAGER</textarea></div>
+            <div class="form-group"><label>Signature Upload</label><input type="file" accept="image/*" onchange="previewImg(this, 'displaySig')"></div>
+        </div>
+        
+        <div class="form-section">
+            <span class="section-title">Media</span>
+            <div class="form-group"><label>Employee Photo</label><input type="file" accept="image/*" onchange="previewImg(this, 'displayPhoto')"></div>
         </div>
     </div>
 
     <div class="main-content">
-        <div class="live-indicator"><div class="live-dot"></div> Live Preview</div>
-        
         <div class="id-container">
-            <div class="print-area" id="id-wrap" style="display:flex; gap:20px;">
+            <div id="id-wrap" style="display:flex; gap:20px;">
                 <div class="id-card">
                     <div class="header">
-                        <div class="logo-box">
-                            <img id="imgLogo" src="logo.png" onerror="this.src='https://via.placeholder.com/45?text=Logo'">
-                        </div>
-                        <div style="flex-grow:1">
-                            <div class="bn-banner-box">
-                                <img id="imgBnTitle" src="banner.png" onerror="this.style.display='none'">
-                            </div>
+                        <div class="logo-box"><img id="imgLogo" src="logo.png" onerror="this.src='https://via.placeholder.com/45?text=Logo'"></div>
+                        <div class="header-text-area">
+                            <div class="bn-banner-box"><img id="imgBnTitle" src="banner.png"></div>
+                            <div class="header-line"></div>
                             <div class="en-title">Sonali Bank PLC</div>
                         </div>
                     </div>
                     <div class="id-banner">IDENTITY CARD</div>
                     <div class="serial-text">SERIAL NO. <span id="outSerial">-----</span></div>
-                    <div class="photo-frame"><img id="displayPhoto" src="https://via.placeholder.com/150?text=Upload+Photo"></div>
+                    <div class="photo-frame"><img id="displayPhoto" src="https://via.placeholder.com/150?text=Photo"></div>
                     <div class="info-grid">
                         <div class="row"><span>Name</span><span>:</span><span class="val" id="outName">---</span></div>
                         <div class="row"><span>Designation</span><span>:</span><span class="val" id="outDesig">---</span></div>
@@ -178,73 +153,61 @@
                     <div class="contact-info">
                         <div>Blood Group : <span id="outBlood">---</span></div>
                         <div>Mobile No : <span id="outMob">---</span></div>
+                        <div>Office Phone : <span id="outOffice">---</span></div>
                     </div>
                     <div class="sig-container">
                         <div class="sig-box"><img id="displaySig" src=""></div>
-                        <span class="auth-label">(Authorized Signature)</span>
-                        <div style="font-size:10px; font-weight:bold; margin-top:2px; color:var(--bank-blue);">Sonali Bank PLC</div>
+                        <span class="auth-label" id="outAuth">(Authorized Signature)</span>
+                        <div style="font-size:9px; font-weight:bold; margin-top:2px;">Sonali Bank PLC</div>
                     </div>
-                    <div class="return-msg">If found please handover to the nearest <br><strong>Sonali Bank PLC Branch</strong></div>
+                    <div style="border-top:0.5px solid #ddd; margin-top:5px; font-size:8px; padding-top:2px;">If found please handover to the nearest <strong>Sonali Bank PLC Branch</strong></div>
                 </div>
             </div>
         </div>
 
         <div class="actions">
-            <button class="btn btn-pdf" onclick="generatePDF()">💾 Download Digital ID</button>
-            <button class="btn btn-print" onclick="window.print()">🖨️ Print Card</button>
+            <button class="btn btn-pdf" onclick="generatePDF()">Download Digital ID</button>
+            <button class="btn btn-print" onclick="window.print()">Print Card</button>
         </div>
     </div>
 
     <script>
         function updateCard() {
-            // Mapping inputs to outputs
-            const fields = {
-                'inName': 'outName',
-                'inIndex': 'outIndex',
-                'inDesig': 'outDesig',
-                'inIssue': 'outIssue',
-                'inSerial': 'outSerial',
-                'inAddr': 'outAddr',
-                'inBlood': 'outBlood',
-                'inMob': 'outMob'
-            };
-
-            for (let [id, outId] of Object.entries(fields)) {
-                let val = document.getElementById(id).value;
-                document.getElementById(outId).innerText = val || '---';
-            }
+            document.getElementById('outName').innerText = document.getElementById('inName').value || '---';
+            document.getElementById('outIndex').innerText = document.getElementById('inIndex').value || '---';
+            document.getElementById('outDesig').innerText = document.getElementById('inDesig').value || '---';
+            document.getElementById('outIssue').innerText = document.getElementById('inIssue').value || '20-03-2026';
+            document.getElementById('outAddr').innerText = document.getElementById('inAddr').value || '---';
+            document.getElementById('outMob').innerText = document.getElementById('inMob').value || '---';
+            document.getElementById('outOffice').innerText = document.getElementById('inOffice').value || '---';
             
-            // Real-time QR Generation
-            const name = document.getElementById('inName').value || 'Employee';
-            const index = document.getElementById('inIndex').value || 'N/A';
-            const qrData = `Sonali Bank ID\nName: ${name}\nIndex: ${index}`;
-            document.getElementById('imgQR').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrData)}`;
+            // Format Signatory Text with line breaks
+            const authText = document.getElementById('inAuth').value || '(Authorized Signature)';
+            document.getElementById('outAuth').innerHTML = authText.replace(/\n/g, '<br>');
+
+            const qrData = `Sonali Bank ID\nName: ${document.getElementById('inName').value}\nIndex: ${document.getElementById('inIndex').value}`;
+            document.getElementById('imgQR').src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(qrData)}`;
         }
 
         function previewImg(input, targetId) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-                reader.onload = function(e) { 
-                    document.getElementById(targetId).src = e.target.result; 
-                    document.getElementById(targetId).style.opacity = "1";
-                }
+                reader.onload = (e) => document.getElementById(targetId).src = e.target.result;
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
         async function generatePDF() {
             const element = document.getElementById('id-wrap');
-            const opt = {
+            html2pdf().set({
                 margin: 0.5,
-                filename: 'Sonali_Bank_Card.pdf',
+                filename: 'Sonali_Bank_ID.pdf',
                 image: { type: 'jpeg', quality: 1 },
-                html2canvas: { scale: 4, useCORS: true, letterRendering: true },
+                html2canvas: { scale: 4, useCORS: true },
                 jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
-            };
-            html2pdf().set(opt).from(element).save();
+            }).from(element).save();
         }
 
-        // Init
         window.onload = updateCard;
     </script>
 </body>
