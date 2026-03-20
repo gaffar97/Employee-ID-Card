@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonali Bank ID Generator | Professional</title>
+    <title>Sonali Bank ID Generator | Final</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root { --bank-blue: #38428a; --bank-gold: #c5a059; --bg-gray: #f4f7f6; }
@@ -23,7 +23,7 @@
 
         /* Preview Area */
         .main-content { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
-        .id-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); display: flex; gap: 30px; }
+        .id-container { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); display: flex; gap: 20px; }
         
         .id-card, .id-card-back { 
             width: 2.125in; height: 3.375in; 
@@ -32,27 +32,19 @@
             font-family: "Times New Roman", Times, serif;
         }
 
-        /* Header Alignment - Title matches Banner length */
-        .header { background: var(--bank-blue); color: white; padding: 10px 12px; display: flex; align-items: center; gap: 12px; height: 75px; }
+        /* Header Alignment */
+        .header { background: var(--bank-blue); color: white; padding: 10px 12px; display: flex; align-items: center; gap: 10px; height: 75px; }
         .logo-box { width: 42px; height: 42px; flex-shrink: 0; }
         #imgLogo { width: 100%; height: 100%; object-fit: contain; }
         
         .header-text-container { flex-grow: 1; display: flex; flex-direction: column; align-items: stretch; }
         .bn-banner-box { width: 100%; height: 28px; display: flex; align-items: center; }
         #imgBnTitle { height: 100%; width: 100%; object-fit: contain; object-position: left; }
-        
-        .en-title { 
-            font-size: 12.5px; 
-            font-weight: bold; 
-            width: 100%; 
-            text-align: left; 
-            margin-top: 2px; 
-            white-space: nowrap;
-        }
+        .en-title { font-size: 12.5px; font-weight: bold; width: 100%; text-align: left; margin-top: 2px; white-space: nowrap; }
 
-        /* Front Content */
+        /* Front Body */
         .id-banner { background: var(--bank-gold); color: white; text-align: center; font-size: 10px; font-weight: bold; padding: 4px 0; letter-spacing: 1px; }
-        .serial-text { text-align: center; font-size: 9px; margin: 5px 0; font-weight: bold; color: #333; }
+        .serial-text { text-align: center; font-size: 9px; margin: 4px 0; font-weight: bold; color: #333; }
         .photo-frame { width: 1.05in; height: 1.2in; border: 1.5px solid var(--bank-gold); margin: 0 auto; overflow: hidden; background: #fafafa; }
         #displayPhoto { width: 100%; height: 100%; object-fit: cover; opacity: 0; }
 
@@ -61,31 +53,29 @@
         .val { font-weight: bold; }
         .bank-url { font-size: 9.5px; font-weight: bold; text-align: center; color: var(--bank-blue); padding-bottom: 10px; }
 
-        /* Back Content */
-        .id-card-back { padding: 12px; text-align: center; display: flex; flex-direction: column; }
-        #imgQR { height: 55px; width: 55px; margin: 0 auto 5px auto; }
-        .addr-head { font-weight: bold; text-decoration: underline; font-size: 10px; display: block; margin-bottom: 3px; }
-        .addr-text { font-size: 9px; line-height: 1.3; text-transform: uppercase; margin-bottom: 10px; min-height: 40px; }
+        /* Back Body - Optimized for space */
+        .id-card-back { padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        #imgQR { height: 50px; width: 50px; margin-bottom: 4px; }
+        .addr-head { font-weight: bold; text-decoration: underline; font-size: 10.5px; display: block; margin-bottom: 3px; }
+        .addr-text { font-size: 9px; line-height: 1.2; text-transform: uppercase; margin-bottom: 6px; width: 100%; text-align: center; }
         
-        .contact-info { font-size: 9.5px; font-weight: bold; line-height: 1.4; margin-bottom: 8px; }
+        .contact-info { font-size: 10px; font-weight: bold; line-height: 1.3; margin-bottom: 5px; width: 100%; }
         
-        /* Professional Transparent Signature */
+        /* Transparent Signature */
         .sig-container { margin-top: auto; width: 100%; }
-        .sig-box { height: 40px; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 2px; }
-        #displaySig { 
-            max-width: 140px; max-height: 100%; object-fit: contain; 
-            mix-blend-mode: multiply; filter: contrast(1.1); 
-        }
+        .sig-box { height: 38px; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 2px; }
+        #displaySig { max-width: 140px; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; filter: contrast(1.1); }
         
         .auth-label { 
             font-size: 8.5px; font-weight: bold; border-top: 1px solid #000; 
             width: 90%; margin: 0 auto; padding-top: 3px; 
-            line-height: 1.2; text-transform: uppercase;
+            line-height: 1.1; text-transform: uppercase;
         }
 
-        .footer-msg { font-size: 8px; border-top: 0.5px solid #ddd; margin-top: 8px; padding-top: 4px; color: #444; }
+        .footer-msg { font-size: 8px; border-top: 0.5px solid #ddd; margin-top: 5px; padding-top: 3px; color: #444; width: 100%; }
 
-        .actions { margin-top: 30px; display: flex; gap: 15px; }
+        /* Actions */
+        .actions { margin-top: 25px; display: flex; gap: 15px; }
         .btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s; }
         .btn-pdf { background: #27ae60; color: white; }
         .btn-print { background: var(--bank-blue); color: white; }
@@ -99,7 +89,7 @@
         <h2>ID Generator</h2>
         
         <div class="form-section">
-            <span class="section-title">Front Side Data</span>
+            <span class="section-title">Employee Front Side</span>
             <div class="form-group"><label>Full Name</label><input type="text" id="inName" oninput="updateCard()"></div>
             <div class="form-group"><label>Designation</label><input type="text" id="inDesig" oninput="updateCard()"></div>
             <div class="form-group"><label>Index No</label><input type="text" id="inIndex" oninput="updateCard()"></div>
@@ -108,22 +98,22 @@
         </div>
         
         <div class="form-section">
-            <span class="section-title">Back Side Data</span>
-            <div class="form-group"><label>Father & Permanent Address</label><textarea id="inAddr" oninput="updateCard()"></textarea></div>
+            <span class="section-title">Back Side Details</span>
+            <div class="form-group"><label>F/H's Name & Address</label><textarea id="inAddr" oninput="updateCard()"></textarea></div>
             <div class="form-group"><label>Blood Group</label><input type="text" id="inBlood" oninput="updateCard()"></div>
             <div class="form-group"><label>Mobile No</label><input type="text" id="inMob" oninput="updateCard()"></div>
             <div class="form-group"><label>Office Phone</label><input type="text" id="inOffice" oninput="updateCard()"></div>
         </div>
 
         <div class="form-section">
-            <span class="section-title">Authorized Official</span>
-            <div class="form-group"><label>Signatory Name & Rank</label><textarea id="inAuth" oninput="updateCard()" placeholder="e.g. (NAME)&#10;RANK"></textarea></div>
-            <div class="form-group"><label>Upload Signature</label><input type="file" accept="image/*" onchange="previewImg(this, 'displaySig')"></div>
+            <span class="section-title">Authority</span>
+            <div class="form-group"><label>Signatory Text</label><textarea id="inAuth" oninput="updateCard()" placeholder="(NAME)&#10;RANK"></textarea></div>
+            <div class="form-group"><label>Signature Image</label><input type="file" accept="image/*" onchange="previewImg(this, 'displaySig')"></div>
         </div>
         
         <div class="form-section">
-            <span class="section-title">Media Upload</span>
-            <div class="form-group"><label>Employee Photo</label><input type="file" accept="image/*" onchange="previewImg(this, 'displayPhoto')"></div>
+            <span class="section-title">Media</span>
+            <div class="form-group"><label>User Photo</label><input type="file" accept="image/*" onchange="previewImg(this, 'displayPhoto')"></div>
         </div>
     </div>
 
@@ -151,8 +141,8 @@
                 </div>
 
                 <div class="id-card-back">
-                    <div style="height: 60px;"><img id="imgQR" src=""></div>
-                    <span class="addr-head">Father's Name & Permanent Address :</span>
+                    <img id="imgQR" src="">
+                    <span class="addr-head">F/H's Name & Permanent Address :</span>
                     <div class="addr-text" id="outAddr"></div>
                     <div class="contact-info">
                         <div>Blood Group : <span id="outBlood"></span></div>
@@ -177,35 +167,22 @@
 
     <script>
         function updateCard() {
-            const fieldMap = {
-                'inName': 'outName',
-                'inIndex': 'outIndex',
-                'inDesig': 'outDesig',
-                'inIssue': 'outIssue',
-                'inSerial': 'outSerial',
-                'inAddr': 'outAddr',
-                'inBlood': 'outBlood',
-                'inMob': 'outMob',
-                'inOffice': 'outOffice'
-            };
-
-            for (let [inId, outId] of Object.entries(fieldMap)) {
-                document.getElementById(outId).innerText = document.getElementById(inId).value;
-            }
+            const ids = ['Name','Index','Desig','Issue','Serial','Addr','Blood','Mob','Office'];
+            ids.forEach(id => {
+                document.getElementById('out'+id).innerText = document.getElementById('in'+id).value;
+            });
             
             const authValue = document.getElementById('inAuth').value;
             document.getElementById('outAuth').innerHTML = authValue.replace(/\n/g, '<br>');
 
-            const name = document.getElementById('inName').value || 'Employee';
-            const index = document.getElementById('inIndex').value || 'N/A';
-            const qrData = `Sonali Bank\nName: ${name}\nIndex: ${index}`;
+            const qrData = `Sonali Bank\nName: ${document.getElementById('inName').value}\nIndex: ${document.getElementById('inIndex').value}`;
             document.getElementById('imgQR').src = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(qrData)}`;
         }
 
         function previewImg(input, targetId) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-                reader.onload = function(e) { 
+                reader.onload = (e) => { 
                     const img = document.getElementById(targetId);
                     img.src = e.target.result; 
                     img.style.opacity = "1";
@@ -224,7 +201,6 @@
                 jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
             }).from(element).save();
         }
-
         window.onload = updateCard;
     </script>
 </body>
